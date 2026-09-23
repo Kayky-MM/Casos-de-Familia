@@ -1,5 +1,9 @@
-node_modules
-dist
+__pycache__
+*.pyc
+.venv
 .env
-test
-generated
+.env.*
+.git
+uploads
+.vscode
+.DS_Store

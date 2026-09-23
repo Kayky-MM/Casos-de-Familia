@@ -1,0 +1,45 @@
+/* Container principal invisível que esconde o que vazar */
+.setup-layout {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-color: #fdf5e6; /* Cor de fundo baseada no seu mockup */
+}
+
+/* O trilho que desliza as telas */
+.setup-slider {
+    display: flex;
+    width: 200vw; /* Comporta exatamente duas telas de 100vw lado a lado */
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Animação suave */
+}
+
+/* Classes dinâmicas para empurrar o trilho */
+.setup-slider.step-1 {
+    transform: translateX(0);
+}
+
+.setup-slider.step-2 {
+    transform: translateX(-100vw);
+}
+
+/* Cada etapa ocupa exatos 100vw */
+.setup-step {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Estilização do Wrapper do Passo 2 --- */
+.setup-profile-wrapper {
+    /* Garante que os cards do PersonEdit fiquem centralizados */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}

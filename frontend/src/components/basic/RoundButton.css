@@ -1,0 +1,16 @@
+.round-btn {
+    border-radius: 50%;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left:0;
+    margin: 1em;
+    transition: all 0.2s ease-in-out;
+}
+
+.round-btn:hover {
+    cursor: pointer;
+    scale: 1.05;
+}

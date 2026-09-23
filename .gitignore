@@ -8,7 +8,11 @@ node_modules
 dist
 test
 generated
-
+__pycache__
+uploads
+*.db
+*.sqlite3
+*.db-journal
 # Logs
 logs
 *.log

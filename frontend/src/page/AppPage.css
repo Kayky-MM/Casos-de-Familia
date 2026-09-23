@@ -1,0 +1,21 @@
+.react-flow-panel-fixo {
+    margin: 16px; 
+}
+
+.btn-adicionar-pessoa {
+    background-color: var(--color-primary, #ffffff);
+    color: black;
+    border: 1px solid #cbd5e1;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+.btn-adicionar-pessoa:hover {
+    background-color: var(--color-terciary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}

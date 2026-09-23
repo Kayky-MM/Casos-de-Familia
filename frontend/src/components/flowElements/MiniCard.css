@@ -1,0 +1,101 @@
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    border: var(--border-test);
+    border-radius: 16px;
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    color: black;
+    gap: 0.5em;
+    transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+    cursor: pointer;
+    scale: 1.05;
+}
+
+.card h3 {
+    font-size: 1em;
+    flex: 1 1;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Altere para o número de linhas que você quer mostrar */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+.eye-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    /* Joga 50% da largura pra direita e 50% da altura pra cima, cravando o centro na quina */
+    transform: translate(50%, -50%); 
+    
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #ffffff; /* Fundo do botão redondo */
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    
+    /* Esconde o botão por padrão e remove interações */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+/* Faz o botão aparecer quando passa o mouse no CARD */
+.card:hover .eye-button {
+    opacity: 1;
+    pointer-events: auto; /* Reativa os cliques */
+}
+
+/* Efeito extra se passar o mouse direto no BOTÃO */
+.eye-button:hover {
+    background-color: #f0f0f0;
+    /* Mantém a translação original e adiciona um leve scale */
+    transform: translate(50%, -50%) scale(1.1); 
+    cursor: pointer;
+}
+
+.eye-icon {
+    width: 100%;
+    height: 100%;
+}
+
+
+.eye-button::after {
+    content: attr(data-tooltip); 
+    
+    position: absolute;
+    bottom: 125%; /* Posiciona acima do botão */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza com o botão */
+    
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    font-size: 10px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap; /* Impede que o texto quebre de linha */
+    
+    /* Escondido por padrão */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+/* Mostra o Tooltip apenas quando o mouse está EM CIMA DO BOTÃO (não do card inteiro) */
+.eye-button:hover::after {
+    opacity: 1;
+}

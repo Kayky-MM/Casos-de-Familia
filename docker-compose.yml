@@ -2,17 +2,10 @@ services:
   backend:
     build: ./backend
     ports:
-      - "3000:3000"
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - DATABASE_USER=${DB_USER}
-      - DATABASE_PASSWORD=${DB_ROOT_PASSWORD}
+      - "8000:8000"
 
     networks:
-      - private_network
       - public_network
-    depends_on:
-      - mysql
 
   frontend:
     build: ./frontend
@@ -21,20 +14,10 @@ services:
     restart: always
     networks:
       - public_network
-
-  mysql:
-    image: mysql:8
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
-    networks:
-      - private_network
-    volumes:
-      - mysql_data:/var/lib/mysql
+    depends_on:
+      - backend
 
 networks:
-  private_network:
-    driver: bridge
   public_network:
     driver: bridge
 

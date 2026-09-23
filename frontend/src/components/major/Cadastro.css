@@ -1,0 +1,97 @@
+.cadastro-form {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: slideDown 0.3s ease-out;
+}
+
+.cadastro-form h2 {
+    margin: 0;
+    color: #333;
+}
+
+.cadastro-form p {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #444;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #3b82f6;
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 10px;
+    top: 65%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 100%;
+}
+
+.toggle-password-btn svg {
+    width: 100%;
+    height: 100%;
+}
+
+.cadastro-form .submit-btn {
+    margin-top: 10px;
+    padding: 12px;
+    background: var(--color-primary); 
+    align-self: center;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cadastro-form .submit-btn:hover {
+    background: #bc8f5b;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

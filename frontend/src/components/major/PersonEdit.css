@@ -1,0 +1,118 @@
+
+.card-edit-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 128px; 
+    align-items: stretch; 
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.card-edit-wrapper > .card:last-child {
+    background-color: var(--color-primary);
+    border: var(--border-test);
+    border-radius: 16px;
+    padding: 1.5em;
+    position: relative;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.relations-edit-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 100%;
+    gap: 16px;
+}
+
+.select-sexo {
+    background-color: var(--color-primary);
+    border: none;
+    font-size: 1em;
+    color: black;
+}
+
+.edit-input {
+    width: 100%;
+    border-radius: 6px;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 1em;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    color: black;
+}
+
+.edit-input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.name-input {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    background-color: var(--color-primary);
+}
+
+.bio-input {
+    height: 30%;
+    resize: none;
+    border: var(--border-test);
+    padding: 0.5em;
+    text-align: left;
+    background-color: var(--color-secondary);
+    height: 30%;
+    overflow: auto;
+}
+
+.card.editing footer {
+    display: flex;
+    gap: 8px;
+    max-height: fit-content;
+}
+
+.date-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.date-group label {
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.relation-input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.relation-input-group .edit-input {
+    flex: 1; /* O input cresce para ocupar o espaço */
+}
+
+.married-checkbox {
+    display: flex;
+    justify-content: center;
+    font-size: 0.9em;
+    color: #475569;
+}
+
+.married-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
