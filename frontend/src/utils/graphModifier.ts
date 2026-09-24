@@ -111,12 +111,12 @@ export function rebuildEdges(
   idsToRemove.add(clickedId); // refresh
   let activeEdges = oldEdges.filter(e => !idsToRemove.has(e.source) && !idsToRemove.has(e.target))
   .map(e => {
-    return (e.type === 'childedge' && idsToRemove.has(e.data?.conjugeId)) ? {...e, sourceHandle: 'single', data: {conjugeId : undefined}} : e
+    return (e.type === 'childedge' && idsToRemove.has(e.data?.conjugeId as string)) ? {...e, sourceHandle: 'single', data: {conjugeId : undefined}} : e
   });
 
   const nodeExists = (id: string | undefined) => currentNodes.some(n => n.id === id);
 
-  const addEdge = (source: string, target: string, type: string, sourceHandle: string, targetHandle: string, data?) => {
+  const addEdge = (source: string, target: string, type: string, sourceHandle: string, targetHandle: string, data? : {conjugeId: string | undefined}) => {
     const exists = activeEdges.some(e => e.source === source && e.target === target);
     if (!exists && nodeExists(source) && nodeExists(target)) {
       activeEdges.push(createEdge(source, target, type, sourceHandle, targetHandle, data));
@@ -179,12 +179,12 @@ function adjustRightFlag(firstNodeId : string | undefined, secondNodeId: string 
 }
 
 export function addNodes(
-  clickedId: string,
+  // clickedId: string,
   clickedPosition: XYPosition,
   clickedLayer: number,
   onDetailClick: (arg0: React.MouseEvent, arg1: string) => void,
   clickedData: RelativesResponse,
-  fetchedData: Record<string, RelativesResponse>,
+  // fetchedData: Record<string, RelativesResponse>,
   currentNodes: Node[],
   currentEdges: Edge[]
 ): [Node[], Confirmation] {
@@ -421,7 +421,7 @@ export function anchorNode(
               childNode.id, 
               'miniCard', 
               { x: childrenBaseX, y: childrenBaseY }, 
-              { right: true, nome: childNode.data.nome as string, layer: mainLayer + 1, onClick: onDetailClick, imgUrl: childNode.data.imgUrl} 
+              { right: true, nome: childNode.data.nome as string, layer: mainLayer + 1, onClick: onDetailClick, imgUrl: childNode.data.imgUrl as string} 
           );
           
           workingNodes = insertNodeWithCollision(

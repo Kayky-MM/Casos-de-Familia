@@ -8,7 +8,7 @@ import './AppPage.css';
 
 export function AppPage(){
     const {personId: loggedUser} = useParams()
-    const [selectedPersonId, setSelectedPersonId] = useState<number | 'new' | null>(null);
+    const [selectedPersonId, setSelectedPersonId] = useState<string>('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [refreshTrigger, setRefreshTrigger] = useState<RefreshTrigger | null>(null);
 
@@ -19,13 +19,13 @@ export function AppPage(){
 
     const showPersonScreen = (e: React.MouseEvent, clickedId: string) => {
       e.stopPropagation();
-      setSelectedPersonId(Number(clickedId));
+      setSelectedPersonId(clickedId);
       setIsModalOpen(true);
     }
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        setSelectedPersonId(null);
+        setSelectedPersonId('');
     }
 
     const handleGraphUpdate = (triggerData: RefreshTrigger) => {

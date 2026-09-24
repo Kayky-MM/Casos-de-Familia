@@ -1,0 +1,16 @@
+FROM python:3.11-slim
+# Imagem do python, alpine não sei o que é
+# Define o diretório
+WORKDIR /usr/src/back
+
+COPY requirements.txt .
+# Instalo as dependências
+RUN pip install -r requirements.txt
+# Copio tudo para a pasta atual
+COPY . .
+# volto pra raiz e executo fastapi run
+WORKDIR /usr/src/back
+
+EXPOSE 8000
+
+CMD ["sh", "-c", "cd database && alembic upgrade head && cd .. && fastapi run"]

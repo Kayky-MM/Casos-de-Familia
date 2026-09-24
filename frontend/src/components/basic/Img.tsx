@@ -9,7 +9,7 @@ export function Img(props: ImgProps) {
         event.target.value = '';
     };
 
-    const handleFileDelete = (event: React.MouseEvent) => {
+    const handleFileDelete = () => {
         props.onFileChange?.(null, true);
     }
 

@@ -14,7 +14,7 @@ export function handleClick(context: StrategyContext): GraphResult {
   const relatives = fetchedData[clickedId];
   const currentLayer = (targetNode.data.layer as number) ?? 0;
   
-  const [nextNodes, confirmation] = addNodes( clickedId, targetNode.position, currentLayer, onDetailClick, relatives, fetchedData, nodes, edges);
+  const [nextNodes, confirmation] = addNodes( targetNode.position, currentLayer, onDetailClick, relatives, nodes, edges);
   
   const nodesToRemove = getNodesToRemove(clickedId, relatives, fetchedData, confirmation);
 

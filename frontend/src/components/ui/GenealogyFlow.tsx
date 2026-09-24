@@ -1,12 +1,20 @@
-import { Background, BackgroundVariant, ConnectionMode, Panel, ReactFlow } from "@xyflow/react";
+import { Background, ConnectionMode, Panel, ReactFlow } from "@xyflow/react";
 import { useGenealogyGraph } from "../../hooks/useGenealogyGraph";
 import { edgeTypes, nodeTypes } from "../../types/NodeTypes";
 import { GraphSearchBar } from "../major/GraphSearchBar";
+import type { RefreshTrigger } from "../../types/refreshTrigger";
 
-export function GenealogyFlow(props) {
+interface GenealogyFlowProps {
+  onDetailClick: (e: React.MouseEvent, id: string) => void;
+  refreshTrigger: RefreshTrigger | null;
+  handleAddPerson: () => void;
+  loggedPersonId: string | undefined;
+}
+
+export function GenealogyFlow(props : GenealogyFlowProps) {
   const {onDetailClick, refreshTrigger, handleAddPerson, loggedPersonId} = props
   
-  const { nodes, edges, onNodesChange, onEdgesChange, onNodeClick, onEdgeClick } = useGenealogyGraph(loggedPersonId, onDetailClick, refreshTrigger);
+  const { nodes, edges, onNodesChange, onEdgesChange, onNodeClick, onEdgeClick } = useGenealogyGraph(Number(loggedPersonId), onDetailClick, refreshTrigger);
 
   return (
     <ReactFlow

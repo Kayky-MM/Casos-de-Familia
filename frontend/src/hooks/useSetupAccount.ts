@@ -35,7 +35,7 @@ export function useSetupAccount(){
 
             return {success: true, personId: data.idPessoa, msg: "Requisição feita"};
         } catch (error) {
-            return {success: false, personId: null, msg: error?.message || ''};
+            return {success: false, personId: null, msg: (error instanceof Error) ? error?.message || '' : ''};
         }
     }
 

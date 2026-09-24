@@ -6,10 +6,10 @@ import './PersonEdit.css';
 import { useSearch } from '../../hooks/useSearch';
 import { SearchModal } from './SearchModal';
 import { RelationSlot } from '../basic/RelationSlot';
+import type { PersonEditForm, PersonEditProps } from '../../types/PersonEdit';
+import type { Pessoa } from '../../types/Responses';
 
-const API_URL = import.meta.env.VITE_API_URL;
-
-export function PersonEdit(props: any) {
+export function PersonEdit(props: PersonEditProps) {
     const [isLoading, setIsLoading] = useState(false);
     const { isSearchOpen, searchQuery, searchResults, targetRelation, openSearch, closeSearch, handleSearch } = useSearch();
     const {sexo, nome, biografia, dataNascimento, dataFalecimento} = props.person;
@@ -17,7 +17,7 @@ export function PersonEdit(props: any) {
     
     const isNew = props.id === 'new' || props.id === 'new-user';
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<PersonEditForm>({
         nome: nome || '',
         sexo: sexo || 'M',
         biografia: biografia || '',
@@ -31,7 +31,7 @@ export function PersonEdit(props: any) {
 
     const [selectedAvatarFile, setSelectedAvatarFile] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string>(
-        props.person?.avatarUrl ? `${API_URL}${props.person.avatarUrl}?t=${new Date().getTime()}` : '/noPhoto.png'
+        props.person?.avatarUrl ? `${import.meta.env.VITE_API_URL}${props.person.avatarUrl}?t=${new Date().getTime()}` : '/noPhoto.png'
     );
     const [deleteFile, setDeleteFile] = useState(false);
 
@@ -50,7 +50,7 @@ export function PersonEdit(props: any) {
         });
     };
 
-    const onSelectRelation = (personSelected: any) => {
+    const onSelectRelation = (personSelected: Pessoa) => {
         if (targetRelation) {
             setFormData({ ...formData, [targetRelation]: personSelected });
         }

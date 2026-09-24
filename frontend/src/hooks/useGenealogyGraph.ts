@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { type Node, type Edge, applyNodeChanges, applyEdgeChanges, useReactFlow } from '@xyflow/react';
+import { type Node, type Edge, applyNodeChanges, applyEdgeChanges, useReactFlow, type NodeChange, type EdgeChange } from '@xyflow/react';
 import { createNode } from '../types/NodeTypes';
 import { processGraphUpdate } from '../strategies';
 import { fetchPerson, fetchPersonWithFamily } from '../utils/fetchPerson';
@@ -10,7 +10,7 @@ import type { Pessoa } from '../types/Responses';
 import { LAYOUT } from '../utils/layout';
 import { useNavigate } from 'react-router-dom';
 
-export function useGenealogyGraph(userId: number, onDetailClick, refreshTrigger: RefreshTrigger) {
+export function useGenealogyGraph(userId: number, onDetailClick: (e: React.MouseEvent, id: string) => void, refreshTrigger: RefreshTrigger | null) {
   const navigate = useNavigate();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
@@ -19,6 +19,7 @@ export function useGenealogyGraph(userId: number, onDetailClick, refreshTrigger:
   useEffect(() => {
     async function loadInitialTree() {
       try {
+        if(!userId) return;
         const res = await fetch(`${import.meta.env.VITE_API_URL}/people/${userId}`, {
           credentials: "include"
         });
@@ -47,12 +48,12 @@ export function useGenealogyGraph(userId: number, onDetailClick, refreshTrigger:
   }, [userId, onDetailClick, navigate]); 
 
   const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    (changes: NodeChange<Node>[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
     []
   );
 
   const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    (changes: EdgeChange<Edge>[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
 

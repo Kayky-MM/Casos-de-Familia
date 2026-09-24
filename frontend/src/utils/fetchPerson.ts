@@ -1,4 +1,4 @@
-import { type RelativesResponse } from '../types/Responses';
+import { type Pessoa, type RelativesResponse } from '../types/Responses';
 
 export async function fetchPersonWithFamily(personId: string): Promise<Record<string, RelativesResponse>> {
   try {
@@ -17,7 +17,7 @@ export async function fetchPersonWithFamily(personId: string): Promise<Record<st
         mainData.parents.father?.id,
         mainData.parents.mother?.id,
         mainData.conjuge?.id,
-        ...(mainData.children || []).map(c => c.id)
+        ...(mainData.children || []).map((c : Pessoa) => c.id)
       ].filter(Boolean) as string[];
     
       // 3. Dispara as buscas dos parentes em paralelo

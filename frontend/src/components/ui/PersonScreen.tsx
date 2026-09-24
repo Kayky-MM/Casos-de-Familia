@@ -5,11 +5,12 @@ import { PersonNode } from '../major/PersonNode';
 import Back from '../../assets/back.svg?react';
 import './PersonScreen.css';
 import { usePersonEditor } from '../../hooks/usePersonEditor';
+import type { RefreshTrigger } from '../../types/refreshTrigger';
 
 interface PersonScreenProps {
-    personId: number | 'new' | null;
+    personId: string;
     onClose: () => void;
-    onSuccessSave: (arg1: any) => void;
+    onSuccessSave: (arg1: RefreshTrigger) => void;
 }
 
 export function PersonScreen({personId, onClose, onSuccessSave}: PersonScreenProps) {
@@ -44,15 +45,17 @@ export function PersonScreen({personId, onClose, onSuccessSave}: PersonScreenPro
 
                 {isEditing && person ? (
                     <PersonEdit 
-                        {...person} 
                         id={personId}
+                        person={person.person}
+                        parents={person.parents}
+                        conjuge={person.conjuge}
                         onCancel={handleCancel} 
                         onSubmit={handleSubmit} 
                     />
                 ) : (
                     person && (
                         <PersonNode
-                            {...person} 
+                            person={person.person}
                             onEdit={handleEditClick} 
                             onDeleteRequest={handleDelete}
                         />

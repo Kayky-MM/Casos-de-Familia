@@ -3,15 +3,16 @@ import './PersonNode.css';
 import { formatarData } from '../../utils/dateFormatter';
 import Ellipsis from '../../assets/ellipsisVertical.svg?react';
 import { useState } from 'react';
-import { type RelativesResponse } from '../../types/Responses';
+import { type Pessoa } from '../../types/Responses';
 
 interface PersonProps {
+    person: Pessoa;
     onEdit: () => void;
     onDeleteRequest: () => void; 
 }
 
 const API_URL = import.meta.env.VITE_API_URL 
-export function PersonNode(props: RelativesResponse & PersonProps){
+export function PersonNode(props: PersonProps){
     const { onEdit, onDeleteRequest} = props
     const {sexo, nome, biografia, dataNascimento, dataFalecimento, avatarUrl} = props.person
     const [menuAberta, setMenuAberta] = useState(false);

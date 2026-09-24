@@ -7,6 +7,7 @@ interface UseEdgeClickProps {
 
 export function useEdgeClick({setEdges}: UseEdgeClickProps){
     return useCallback(async (event: React.MouseEvent, edgeClicked: Edge) => {
+      event.preventDefault();
         setEdges((eds) =>
           eds.map((e) => {
             if(edgeClicked.type === 'conjugeEdge'){

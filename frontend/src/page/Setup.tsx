@@ -6,6 +6,8 @@ import './Setup.css';
 import { useNavigate } from 'react-router-dom';
 import { Cadastro } from '../components/major/Cadastro';
 import { RoundButton } from '../components/basic/RoundButton';
+import { nullPerson } from '../types/Responses';
+import type { PersonEditForm } from '../types/PersonEdit';
 
 export function Setup() {
     const [step, setStep] = useState<1 | 2>(1);
@@ -20,7 +22,7 @@ export function Setup() {
         setStep(2);
     };
 
-    const onFinishSetup = async (personFormData: any, avatarFile: File | null) => {
+    const onFinishSetup = async (personFormData: PersonEditForm, avatarFile: File | null) => {
         const {success, personId, msg} = await handleCreateProfile(accountData, personFormData, avatarFile);
         if(success && personId){
             navigate(`/tree/${personId}`)
@@ -49,9 +51,9 @@ export function Setup() {
 
                         <PersonEdit 
                             id="new-user"
-                            person={{}}
-                            parents={{}}
-                            conjuge={{}}
+                            person={nullPerson}
+                            parents={{father: nullPerson, mother: nullPerson, married: false}}
+                            conjuge={nullPerson}
                             onSubmit={onFinishSetup}
                             onCancel={() => setStep(1)}
                         />

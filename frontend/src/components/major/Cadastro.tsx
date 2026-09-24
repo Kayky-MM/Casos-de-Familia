@@ -64,7 +64,7 @@ export function Cadastro({ mode, onSubmit }: CadastroProps) {
                     onClick={() => setShowPassword(!showPassword)}
                     className='toggle-password-btn'
                 >
-                    {showPassword ? <EyeOff size={40} /> : <Eye size={40} />}
+                    {showPassword ? <EyeOff /> : <Eye />}
                 </button>
             </div>
             

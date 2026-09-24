@@ -4,14 +4,23 @@ import './MiniCard.css';
 import Eye from '../../assets/eye.svg?react';
 import { useMemo } from 'react';
 
-const API_URL = import.meta.env.VITE_API_URL 
-export function MiniCard(props) {
+interface MiniCardProps {
+    data: {
+        nome:string;
+        right:boolean;
+        onClick: (e: React.MouseEvent, id: string) => void;
+        imgUrl: string;
+    },
+    id: string;
+}
+
+export function MiniCard(props : MiniCardProps) {
     const {nome, right, onClick, imgUrl} = props.data;
     const id = props.id
 
     const imageSrc = useMemo(() => {
         if (!imgUrl) return '/noPhoto.png';
-        return `${API_URL}${imgUrl}?t=${new Date().getTime()}`;
+        return `${import.meta.env.VITE_API_URL}${imgUrl}?t=${new Date().getTime()}`;
     }, [imgUrl]);
 
     return (

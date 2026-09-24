@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine, Column, String, Integer, Date, ForeignKey, Enum, event
 from sqlalchemy.orm import declarative_base, sessionmaker
 from pathlib import Path
+import os
 
-DATABASE_PATH = Path(__file__).resolve().parent / "family_tree.db"
+DATABASE_PATH = Path(__file__).resolve().parent / os.getenv("DATABASE_NAME", 'family_tree.db')
 DATABASE_URL = f"sqlite:///{DATABASE_PATH.as_posix()}"
 
 db = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})

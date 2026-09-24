@@ -4,7 +4,11 @@ import ChevRight from '../../assets/chevRight.svg?react';
 import ChevLeft from '../../assets/chevLeft.svg?react';
 import './GraphSearchBar.css';
 
-export function GraphSearchBar({onDetailClick}) {
+interface GraphSearchBarProps {
+    onDetailClick: (e: React.MouseEvent, id: string) => void;
+}
+
+export function GraphSearchBar({onDetailClick}: GraphSearchBarProps) {
     const { 
         query, setQuery, isLoading, results, currentIndex, hasSearched,
         handleSearch, nextResult, prevResult 

@@ -6,7 +6,7 @@ import type { RefreshTrigger } from '../types/refreshTrigger';
 import { LAYOUT } from '../utils/layout';
 
 
-export function useGraphSearch(onDetailClick) {
+export function useGraphSearch(onDetailClick: (e: React.MouseEvent, id: string) => void) {
     const [query, setQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [results, setResults] = useState<any[]>([]);

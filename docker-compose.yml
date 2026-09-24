@@ -3,12 +3,19 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
     networks:
       - public_network
+    volumes:
+      - db-data:/usr/src/back/database
+      - ./backend/uploads:/usr/src/back/uploads
 
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      args:
+        - VITE_API_URL=${VITE_API_URL}
     ports:
       - "80:80"
     restart: always
@@ -22,4 +29,4 @@ networks:
     driver: bridge
 
 volumes:
-  mysql_data:
+  db-data:

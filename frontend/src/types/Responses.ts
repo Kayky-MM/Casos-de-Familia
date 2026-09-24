@@ -3,9 +3,19 @@ export interface Pessoa {
     nome: string;
     sexo: 'M' | 'F';
     biografia: string | null;
-    dataNascimento: Date | null;
-    dataFalecimento: Date | null;
+    dataNascimento: Date | string | null;
+    dataFalecimento: Date |string | null;
     avatarUrl?: string | null;
+}
+
+export const nullPerson : Pessoa = {
+    id: 0,
+    nome: '',
+    sexo: 'F',
+    biografia: '',
+    dataNascimento: '',
+    dataFalecimento: '',
+    avatarUrl: '',
 }
 
 export interface RelativesResponse {

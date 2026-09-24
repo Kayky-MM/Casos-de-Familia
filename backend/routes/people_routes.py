@@ -438,8 +438,6 @@ def create_person(req: CreatePersonRequest, db: Session = Depends(get_db)):
                 spouse = db.query(Pessoa).filter(Pessoa.id == rel.conjuge_id).first()
                 if not spouse:
                     raise HTTPException(status_code=400, detail="Cônjuge informado não existe no banco de dados.")
-                if spouse.sexo != expected_spouse_sex:
-                    raise HTTPException(status_code=400, detail=f"O cônjuge deve ser do sexo {expected_spouse_sex}.")
                 
                 # 1.4 Verifica se o cônjuge já é casado com outra pessoa
                 existing_marriage = db.query(Parentesco).filter(

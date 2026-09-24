@@ -13,7 +13,7 @@ interface UseNodeClickProps {
 
 export const useNodeClick = ({ reactFlow, setNodes, setEdges , onDetailClick }: UseNodeClickProps) => {
   return useCallback(async (event: React.MouseEvent, node: Node) => {
-
+    event.preventDefault();
     const clickedId = node.id;
       const nodes = reactFlow.getNodes();
       const edges = reactFlow.getEdges();
@@ -23,6 +23,7 @@ export const useNodeClick = ({ reactFlow, setNodes, setEdges , onDetailClick }: 
           const {nextNodes, nextEdges} = handleClick({
             trigger: {
               trigger: "click",
+              relationsChanged: false,
               personId: clickedId
             },
             fetchedData: fetchedData,

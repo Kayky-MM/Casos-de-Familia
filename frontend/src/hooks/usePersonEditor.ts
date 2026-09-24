@@ -3,10 +3,11 @@ import type { RelativesResponse, UpdateResponse } from '../types/Responses';
 import type { RefreshTrigger } from '../types/refreshTrigger';
 import { usePerson } from './usePerson';
 import { validatePersonForm } from '../utils/validationForm';
+import type { PersonEditForm } from '../types/PersonEdit';
 
 const url = import.meta.env.VITE_API_URL;
 
-export async function uploadAvatar(personId: number, file: File | null, deleteFile? : boolean) {
+export async function uploadAvatar(personId: number, file?: File | null, deleteFile? : boolean) {
     if(deleteFile){
         const response = await fetch(`${url}/people/${personId}/avatar`, {
         method: 'DELETE',
@@ -39,7 +40,7 @@ export async function uploadAvatar(personId: number, file: File | null, deleteFi
     return response.json();
 }
 
-export function usePersonEditor(personId: number | 'new' | null, onPersonUpdate: (arg1: RefreshTrigger) => void, onClickClose: () => void) {
+export function usePersonEditor(personId: string, onPersonUpdate: (arg1: RefreshTrigger) => void, onClickClose: () => void) {
     const isNew = personId === 'new';
     const {person, setPerson} = usePerson(Number(personId));
     
@@ -67,10 +68,10 @@ export function usePersonEditor(personId: number | 'new' | null, onPersonUpdate:
         setFeedback({ text: 'Modo de edição ativado. Altere os dados abaixo.', type: 'info' });
     };
 
-    const handleCancel = (e?: React.MouseEvent) => {
+    const handleCancel = () => {
         // 2. Se cancelar a criação de uma pessoa NOVA, fecha a tela inteira
         if (isNew) {
-            if (onClickClose) onClickClose(e);
+            if (onClickClose) onClickClose();
         } else {
             setIsEditing(false);
             setIsDeleteModalOpen(false);
@@ -78,13 +79,13 @@ export function usePersonEditor(personId: number | 'new' | null, onPersonUpdate:
         }
     };
 
-    const handleClose = (e: React.MouseEvent) => {
+    const handleClose = () => {
         setIsEditing(false);
         setFeedback({ text: '', type: null });
-        if (onClickClose) onClickClose(e);
+        if (onClickClose) onClickClose();
     };
 
-    const handleSave = async (updatedData: any, imageFile?: File | null, deleteFile?: boolean) => {
+    const handleSave = async (updatedData: PersonEditForm, imageFile?: File | null, deleteFile?: boolean) => {
         setFeedback({ text: 'Salvando...', type: 'info' });
         const {valid, msg} = validatePersonForm(updatedData);
         if(!valid){
@@ -156,7 +157,7 @@ export function usePersonEditor(personId: number | 'new' | null, onPersonUpdate:
         }
     };
 
-    const handleAdd = async (addData: any, imageFile?: File | null) => {
+    const handleAdd = async (addData: PersonEditForm, imageFile?: File | null) => {
         setFeedback({ text: 'Adicionando...', type: 'info' });
         const {valid, msg} = validatePersonForm(addData);
         if(!valid){

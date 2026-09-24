@@ -1,6 +1,6 @@
 import type { Pessoa } from "../types/Responses";
 
-export function validatePersonForm({nome, dataNascimento, dataFalecimento } : Pessoa){
+export function validatePersonForm({nome, dataNascimento, dataFalecimento }: Pick<Pessoa, "nome" | "dataNascimento" | "dataFalecimento">){
     if(!nome || nome.trim() === ''){
         return {valid: false, msg: "O nome não pode ser vazio"}
     }
